@@ -3,6 +3,7 @@ const abc = require('../introduction/intro')
 const abd = require('../logger/logger')
 const abt= require('../util/helper')
 const abq= require('../validator/formatter')
+const aqq=require('../new/late')
 const router = express.Router();
 
 router.get('/test-me', function (req, res) {
@@ -16,6 +17,8 @@ router.get('/test-me', function (req, res) {
     abq.tr()
     abq.lo()
     abq.uq()
+    console.log(aqq.ah)
+    aqq.bh()
 
 });
 
