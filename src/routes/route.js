@@ -54,7 +54,11 @@ router.get('/test-me', function (req, res) {
 
 });
 
-
+router.get('/students/:name/:age',function(req,res){
+    let student = req.params
+    let st=student.name + student.age
+    res.send(st)
+})
 router.get('/test-you', function(req, res){
     res.send('This is the second routes implementation')
 })
