@@ -28,6 +28,29 @@ router.get('/test-me', function (req, res) {
     let ch=lodash.chunk(arr,3)
     console.log(ch)
 
+    // Create an array containing the first 10 odd numbers. Using the tail function, return the last 9 elements of it and print them on console.
+
+    let arr1=[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+    let ta=lodash.tail(arr1)
+    console.log(ta)
+
+    // Create 5 arrays of numbers containing a few duplicate values. Using the function union create a merged array with only unique values and print them on console
+
+    let un1=[1,11,8,8]
+    let un2=[1,51,4,8]
+    let un3=[1,5,5,6]
+    let un4=[1,12,2,8]
+    let un5=[1,74,74,8]
+    let arr2=lodash.union(un1,un2,un3,un4,un5)
+    console.log(arr2)
+
+    //Use the function fromPairs to create an object containing key value pairs. For example [“horror”,”The Shining"],[“drama”,”Titanic"],[“thriller”,”Shutter Island"],[“fantasy”,”Pans Labyrinth"]
+
+    let arr3=[['horror','The Shining'],['drama','Titanic'],['thriller','Shutter Island'],['fantasy','Pans Labyrinth']]
+    let arr4=lodash.fromPairs(arr3)
+    console.log(arr4)
+
+
 
 });
 
