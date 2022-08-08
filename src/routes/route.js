@@ -1,4 +1,5 @@
 const express = require('express');
+const lodash=require('lodash')
 const abc = require('../introduction/intro')
 const abd = require('../logger/logger')
 const abt= require('../util/helper')
@@ -19,6 +20,14 @@ router.get('/test-me', function (req, res) {
     abq.uq()
     console.log(aqq.ah)
     aqq.bh()
+
+    //problem 4
+    //Create an array of strings containing the names all the months of a year and split the array into 4 equally sized sub-arrays using the chunk function. Print these sub-arrays
+
+    let arr=['January', 'February',' March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let ch=lodash.chunk(arr,3)
+    console.log(ch)
+
 
 });
 
