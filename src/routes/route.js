@@ -115,9 +115,13 @@ router.get('/films/:filmId',function(req,res){
         'name': 'Finding Nemo'
        }]
        
-       let a=req.params
-       let b=a.filmId
-       let c=arr.find(x => x.id === b)
+       let a=req.params.filmId
+       let c
+       for(let i=0;i<arr.length;i++){
+        if(a==arr[i].id){
+             c=arr[i].name
+        }
+       }
        res.send(c)
 })
 
