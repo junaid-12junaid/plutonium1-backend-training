@@ -3,6 +3,7 @@ const myHelper = require('../util/helper')
 const underscore = require('underscore')
 
 const router = express.Router();
+//const app=express.App();
 
 router.get('/test-me', function (req, res) {
     myHelper.printDate()
@@ -36,6 +37,49 @@ router.get('/candidates/:canidatesName', function(req, res){
     res.send('Done')
 })
 
-router.get('/Book')
+//09-08-2022 assignment
+//01.
+   // -write an api which gives the missing number in an array of integers starting from 1….e.g [1,2,3,5,6,7] : 4 is missing
+ // Your route code will look like this
+ router.get("/sol1", function (req, res) {
+	   //logic : sum of numbers is n(n+1)/2..so get sum of all numbers in array. now take sum of numbers till last digit in the array
+	   let arr= [1,2,3,5,6,7]
+       let sum =0
+	   let missingNumber=[]
+       for(i=0;i<arr.length;i++){
+        sum=sum+arr[i]
+}
+        n=arr.length+1
+        missingNumber=Math.floor(n*(n+1)/2)-sum
+
+	   ///LOGIC WILL GO HERE 
+	   res.send(  { data: missingNumber  }  );
+ });
+
+ //Q2. 
+ // -write an api which gives the missing number in an array of integers starting from anywhere….e.g [33, 34, 35, 37, 38]: 36 is missing
+// Your route code will look like this
+router.get("/sol2", function (req, res) {
+         //logic : sum of n consecutive numbers is [ n * (first + last) / 2  ]..so get sum of all numbers in array. now take sum of n consecutive numbers.. n would be length+1 as 1 number is missing
+         let arr= [33, 34, 35, 37, 38]
+         let missingNumber=[]
+        let minum=Math.min(...arr)
+        let maxnum=Math.max(...arr)
+        for(i=minum;i<maxnum;i++){
+            if(arr.indexOf(i)<0){
+                missingNumber.push(i)
+            }
+        }
+         ///LOGIC WILL GO HERE 
+
+        return res.send(  { data: missingNumber  }  );
+});
+
+
+
+
+
+
 module.exports = router;
+//module.exports=app;
 // adding this comment for no reason
