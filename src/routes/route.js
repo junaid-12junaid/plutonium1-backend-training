@@ -37,7 +37,7 @@ router.get("/shoes", function(req, res){
 // uses query params
 router.get('/candidates', function(req, res){
     console.log('Query paramters for this request are '+JSON.stringify(req.query))
-    let gender = req.query.gender
+   let gender = req.query.gender
     let state = req.query.state
     let district = req.query.district
     console.log('State is '+state)
