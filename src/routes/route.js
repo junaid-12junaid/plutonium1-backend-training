@@ -1,6 +1,7 @@
 const express = require('express');
 const myHelper = require('../util/helper')
-const underscore = require('underscore')
+const underscore = require('underscore');
+const { get } = require('underscore');
 
 const router = express.Router();
 
@@ -101,6 +102,19 @@ router.get("/films/:filmId", function(req, res){
 
        //if there is no match give an error response
        res.send("The film id doesn't match any movie")
+})
+
+
+router.get('/Book',function(req,res){
+    console.log("the books are"+JSON.stringify(req.query))
+    let name=req.query.name
+    let pages=req.query.pages
+    let size=req.query.size
+    console.log("the name is ",name)
+    console.log("the number of pages are ",pages)
+    console.log("the size is ",size)
+    res.send("Dummy Book")
+    
 })
 
 module.exports = router;
