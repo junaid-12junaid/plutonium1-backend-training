@@ -77,7 +77,12 @@ router.get("/sol2", function (req, res) {
 
 
 
-
+router.get('/Charger',function(req,res){
+    let type =req.query.type
+    let watt=req.query.watt
+    console.log("The type is ",type,"The watt is ",watt)
+    res.send("Dummy charger")
+})
 
 
 module.exports = router;
