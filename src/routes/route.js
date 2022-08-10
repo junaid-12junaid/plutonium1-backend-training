@@ -72,6 +72,7 @@ router.post("/test-post-4", function(req, res) {
 
 
 //Assignment 1 of Post api
+//1st approach easy
 
 let players =
    [
@@ -107,15 +108,113 @@ let players =
    router.post('/players', function (req, res) {
         let a=req.body
         for(var i in players){
-        if(players.name==a.name){
-            return console.log("The name is Exist please Enter other Name")
+            let everyValue=players[i]
+        if(everyValue.name==a.name){
+            return res.send("The name is Exist please Enter other Name")
+         
+            
         }
     }
-    players.push(a)
-
+    
+        players.push(req.body)
         
        //LOGIC WILL COME HERE
        res.send(  { data: players , status: true }  )
    })
+
+   //Assignment 1 of Post api
+//2nd  approach by using flag by sir
+
+router.post('/2nd-post-Approach-assignment',function(req,res){
+    let a=req.body
+    let isNameRepeated=false
+
+    for(i=0;i<players.length;i++){
+        if(players[i].name==a.name){
+            isNameRepeated=true
+        }            
+    }
+    if(isNameRepeated){
+        res.send("the name is Reapeated")
+    }else{
+    players.push(a)
+    res.send({players})
+    }
+})
+
+//query params
+//qestion 1 if marks>40 print pass else fail
+
+router.get("/pass-me",function(req,res){
+    let a=req.query.marks
+    if(a>40){
+        res.send("Pass")
+    }else{
+        res.send("Fail")
+    }
+})
+
+//2 in arr i need the greater number or (filter)> number in new array
+
+router.get('/filter-me',function(req,res){
+    let a=req.query.num
+    let arr1=[]
+    let arr=[11,558,4646,54684,741,5884]
+   // let arr1=arr.filter(x=>x>a)
+    
+    for(i=0;i<arr.length;i++){
+        if(arr[i]>a){
+            arr1.push(arr[i]);
+        }
+    }
+    res.send(arr1)
+
+})
+
+//Assignment 2
+let persons=[
+    {
+        name:"Junaid",
+        age:10,
+        votingStatus:false
+    },
+    {
+        name:"Suhail",
+        age:20,
+        votingStatus:false
+    },
+    {
+        name:"aw",
+        age:70,
+        votingStatus:false
+    },
+    {
+        name:"SC",
+        age:5,
+        votingStatus:false
+    },
+    {
+        name:"FR",
+        age:40,
+        votingStatus:false
+    }
+]
+router.post('/vote-me',function(req,res){
+    let votingAge=req.query.votingAge
+    
+    for(i=0;i<persons.length;i++){
+            if(persons[i].age>=votingAge){
+            persons[i].votingStatus = true
+            res.send({data:persons[i]})
+            
+        }
+        
+    }
+   
+})
+
+
+
+
 
 module.exports = router;
