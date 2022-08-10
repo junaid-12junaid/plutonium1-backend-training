@@ -84,6 +84,76 @@ router.get('/Charger',function(req,res){
     res.send("Dummy charger")
 })
 
+//JSON
+
+router.get('/test-json',function(req,res){
+ res.send({a:3,b:4,mess:"this is message in the JSON"})
+})
+
+//Post 
+router.post('/test-post',function(req,res){
+    let id=req.body.User
+    let pwd=req.body.Password
+    console.log(id,pwd)
+    console.log(req.body)
+
+    res.send({a:3,b:4,mess:"this is message in the JSON"})
+   })
+
+//Question in post take input and add to array
+router.post('/post-qus',function(req,res){
+    let arr=[45,58]
+    let ele=req.body.value
+    arr.push(ele)
+    res.send({msg:arr,name:"junaid"})
+})
+
+//Assignment 1 of Post
+
+let players =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ],
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ],
+       },
+   ]
+
+   router.post('/players', function (req, res) {
+        let a=req.body
+        for(i=0;i<players.length;i++){
+        if(a.name===players.name){
+            return console.log("The name is Repeated Please give another name ")
+        }
+    }
+        players.push(a)
+       //LOGIC WILL COME HERE
+       res.send(  { data: players , status: true }  )
+   })
+  
+
 
 module.exports = router;
 //module.exports=app;
