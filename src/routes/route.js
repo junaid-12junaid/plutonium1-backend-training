@@ -201,16 +201,17 @@ let persons=[
 ]
 router.post('/vote-me',function(req,res){
     let votingAge=req.query.votingAge
-    
+    let arr1=[]
     for(i=0;i<persons.length;i++){
             if(persons[i].age>=votingAge){
             persons[i].votingStatus = true
-            res.send({data:persons[i]})
+                arr1.push(persons[i])
+             
             
         }
         
     }
-   
+    res.send(arr1)
 })
 
 
