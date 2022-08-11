@@ -116,7 +116,7 @@ let players =
         }
     }
     
-        players.push(req.body)
+        players.push(a)
         
        //LOGIC WILL COME HERE
        res.send(  { data: players , status: true }  )
@@ -215,6 +215,39 @@ router.post('/vote-me',function(req,res){
 })
 
 
+//Bonus Assignment
+
+
+let players1 =
+   [
+       {
+           "name": "manish",
+           "dob": "1/1/1995",
+           "gender": "male",
+           "city": "jalandhar",
+           "sports": [
+               "swimming"
+           ]
+       },
+       {
+           "name": "gopal",
+           "dob": "1/09/1995",
+           "gender": "male",
+           "city": "delhi",
+           "sports": [
+               "soccer"
+           ],
+       },
+       {
+           "name": "lokesh",
+           "dob": "1/1/1990",
+           "gender": "male",
+           "city": "mumbai",
+           "sports": [
+               "soccer"
+           ],
+       },
+   ]
 
 
 
