@@ -1,7 +1,7 @@
 const express = require('express');
 const myHelper = require('../util/helper')
 const underscore = require('underscore')
-
+const usercontroller=require('../controller/handler')
 const router = express.Router();
 
 router.get('/test-me', function (req, res) {
@@ -35,6 +35,10 @@ router.get('/candidates/:canidatesName', function(req, res){
     console.log('Candidates name is '+req.params.canidatesName)
     res.send('Done')
 })
+
+
+router.post('/database',usercontroller.fun1)
+router.get('/databaseall',usercontroller.fun2)
 
 
 module.exports = router;
