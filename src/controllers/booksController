@@ -1,0 +1,17 @@
+const modelbooks=require('../models/booksModel')
+
+
+const fun1=async function(req,res){
+    let data=req.body
+    let alldata=await modelbooks.create(data)
+    res.send({mes:alldata})
+}
+
+
+
+const fun2 =async function(req,res){
+    let allBooks=await modelbooks.find()
+    res.send({mes:allBooks})
+}
+module.exports.fun1=fun1
+module.exports.fun2=fun2
