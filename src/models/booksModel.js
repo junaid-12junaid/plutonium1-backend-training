@@ -1,20 +1,28 @@
 const mongoose=require('mongoose')
 
 const userBook=new mongoose.Schema({
-    bookname:{
-        type:String,
-        required:true
+    bookname:String,
+    author:String,
+    year:Number,
+    type:[String],
+    isPublished:Boolean,
+    price:{
+        indianPrice:String,
+        USAPrice:String
     },
-    authorName:{
-        type:String,
-        required:true
+    date:{
+        type:Date,
+        default:Date.now
+
     },
-    category:String,
-    year:Number
+    sales:{
+        type:Number,
+        default:10
+    }
 
 },{timestamps:true})
 
-module.exports=mongoose.model('book',userBook)
+module.exports=mongoose.model('bookfind',userBook)
 
 
 

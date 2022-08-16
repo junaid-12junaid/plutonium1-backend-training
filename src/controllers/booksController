@@ -10,7 +10,7 @@ const fun1=async function(req,res){
 
 
 const fun2 =async function(req,res){
-    let allBooks=await modelbooks.find()
+    let allBooks=await modelbooks.find({isPublished:false,author:"peter"})
     res.send({mes:allBooks})
 }
 module.exports.fun1=fun1
