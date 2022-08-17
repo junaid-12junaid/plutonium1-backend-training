@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema( {
     bookName: {
             type:String,
-            required:true
+    
     }, 
     prices: {
         indianPrice: String,
@@ -16,7 +16,9 @@ const bookSchema = new mongoose.Schema( {
     tags: [String],
     authorName:String,
     totalpages:Number,
-    stockAvailable:Boolean
+    stockAvailable:Boolean,
+    summary:mongoose.Schema.Types.Mixed,
+    isDeleted:Boolean
 }, { timestamps: true });
 
 

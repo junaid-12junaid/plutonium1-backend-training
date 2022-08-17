@@ -4,6 +4,9 @@ const router = express.Router();
 const BookController= require("../controllers/bookController")
 const bookdata=require('../models/bookModel')
 
+
+const moment=require('moment')
+
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
 })
@@ -54,11 +57,43 @@ router.get('/getRandomBooks',async function(req,res){
 })
 
 
-router.get('/practice-q',async function(req,res){
-    let faul=await bookdata.find({bookName:/.*after.*/i}).select({bookName:1,_id:0})
-    res.send(faul)
+router.post('/practice-q',async function(req,res){
+    // let faul=await bookdata.find({bookName:"Torado"})
+    // if(faul.length>0)  res.send({data:faul})
+    // else res.send({mes:"No entry"})
+
+    let faul=await bookdata.findOneAndUpdate({bookName:"TY"},
+    {$set:req.body},
+    {new:true,upsert:true}
+    )
+    console.log(faul)
+    res.send({mes:faul})
+    
+
+
 
 })
+
+
+router.get('/date-q',async function(req,res){
+   // res.send(moment('15-18-2001','DD-MM-YYYY').isValid())
+    //res.send(moment('05 is the my year','YYYY-MM-DD').isValid())
+    //res.send(moment().add(1,'year'))
+    //res.send(moment('17-05-2022','DD-MM-YYYY').fromNow())
+
+    // const date1=moment('01-01-2021','DD-MM-YYYY')
+    // const date2=moment('01-01-2023','DD-MM-YYYY')
+    // res.send(date1.from(date2))
+
+    const date1=moment('01-01-2020','DD-MM-YYYY')
+    const date2=moment('01-01-2010','DD-MM-YYYY')
+    let x=date1.diff(date2,'milliseconds')
+    console.log(x)
+  
+})
+
+
+
 // bookName: {
 //     type:String,
 //     required:true
