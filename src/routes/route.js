@@ -55,6 +55,32 @@ router.get('/getRandomBooks',async function(req,res){
 })
 
 
+router.get('/practice-q',async function(req,res){
+    let faul=await bookdata.find({bookName:/.*after.*/i}).select({bookName:1,_id:0})
+    res.send(faul)
+
+})
+// bookName: {
+//     type:String,
+//     required:true
+// }, 
+// prices: {
+// indianPrice: String,
+// europePrice: String,
+// },
+// year:{
+// type:Number,
+// default:2021
+// },
+// tags: [String],
+// authorName:String,
+// totalpages:Number,
+// stockAvailable:Boolean
+
+
+
+
+
 // create the following API’s (write logic in bookController and routes in routes):
 // createBook : to create a new entry..use this api to create 11+ entries in your collection
 // bookList : gives all the books- their bookName and authorName only 
