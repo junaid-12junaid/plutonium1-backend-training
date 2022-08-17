@@ -35,14 +35,13 @@ router.post('/getBooksInYear',async function(req,res){
 
 
 router.post('/getParticularBooks',async function(req,res){
-    const input=req.query.bookName
-    const input1=req.query.year
-    const allinput=await bookdata.find(  {bookName:input,year:input1}   )
+    const input=req.query
+    const allinput=await bookdata.find(input)
     res.send({data:allinput})
 })
 
 router.get('/getXINRBooks',async function(req,res){
-    const rup=await bookdata.find({"prices.indianPrice":{$in:["RS 100","RS 200","RS 500"]}})
+    const rup=await bookdata.find({"prices.indianPrice":{$in:["RS 100","RS 200","RS 500"]}}).select({bookName:1,_id:0})
     res.send({data:rup})
 })
 

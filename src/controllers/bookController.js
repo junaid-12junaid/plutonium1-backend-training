@@ -16,6 +16,14 @@ const getBooksData= async function (req, res) {
     res.send(allBooks)
 
 }
+
+
+
+
+
+
+
+
     // let allBooks= await BookModel.find( ).count() // COUNT
 
     // let allBooks= await BookModel.find( { authorName : "Chetan Bhagat" , isPublished: true  } ) // AND
