@@ -60,4 +60,6 @@ router.get('/authorsget',author_call.funA2)
 
 router.get('/authorUpdate',author_call.funS1)
 
+router.get('/bookprice',author_call.funS2)
+
 module.exports = router;
