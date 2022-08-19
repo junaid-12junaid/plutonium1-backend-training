@@ -1,65 +1,12 @@
 const express = require('express');
 const router = express.Router();
-// const UserModel= require("../models/userModel.js")
-// const UserController= require("../controllers/userController")
-// const BookController= require("../controllers/bookController")
+const totaldata=require('../controller/booksController')
 
-const author_call=require('../controllers/authorConteroler.js')
-const book_call=require('../controllers/bookControl.js')
+router.post("/createAuthor",totaldata.createAuthor)
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+router.post("/createPublisher",totaldata.createPublisher)
 
-// router.post("/createUser", UserController.createUser  )
+router.post("/createBooks",totaldata.createBooks)
 
-// router.get("/getUsersData", UserController.getUsersData)
-
-// router.post("/createBook", BookController.createBook  )
-
-// router.get("/getBooksData", BookController.getBooksData)
-
-// router.post("/updateBooks", BookController.updateBooks)
-// router.post("/deleteBooks", BookController.deleteBooks)
-
-//MOMENT JS
-const moment = require('moment');
-router.get("/dateManipulations", function (req, res) {
-    
-    // const today = moment();
-    // let x= today.add(10, "days")
-
-    // let validOrNot= moment("29-02-1991", "DD-MM-YYYY").isValid()
-    // console.log(validOrNot)
-    
-    const dateA = moment('01-01-1900', 'DD-MM-YYYY');
-    const dateB = moment('01-01-2000', 'DD-MM-YYYY');
-
-    let x= dateB.diff(dateA, "days")
-    console.log(x)
-
-    res.send({ msg: "all good"})
-})
-
-
-
-
-
-
-//Assignment session 3
-
-//Create 1
-router.post('/authors-q',author_call.funA1)
-
-
-router.post('/books-q',book_call.funB1)
-
-//read 2
-
-router.get('/authorsget',author_call.funA2)
-
-router.get('/authorUpdate',author_call.funS1)
-
-router.get('/bookprice',author_call.funS2)
-
+router.get('/alldetails',totaldata.alldetails)
 module.exports = router;
