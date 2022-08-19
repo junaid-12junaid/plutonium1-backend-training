@@ -1,7 +1,8 @@
 const authorModel=require('../models/authorModle')
 const publisherModel=require('../models/publusherModel')
 const bookModel=require('../models/bookModel')
-const { model } = require('mongoose')
+const { model, default: mongoose } = require('mongoose')
+const ObjectId=mongoose.Schema.Types.ObjectId
 
 
 const createAuthor=async function(req,res){
@@ -16,18 +17,21 @@ const createPublisher=async function(req,res){
 }
 
 const createBooks=async function(req,res){
-    const Btotal=await bookModel.create(req.body)
-    for(i=0;i<Btotal.length;i++){
-        if(!Btotal[i].author){
+    let set=req.body
+    if(!set.author){
         return res.send({State:false, mes:"please give the Id for Author"})
-        }else if(!Btotal[i].publisher){
-        return res.send({State:false, mes:"please give the Id for Publisher"})  
-        }else if(Btotal[i].author!==author._id){
-            return req.send({mes:"Please give a valid author ID"})
-        }else if(Btotal[i].publisher!==publisher._id){
-            return req.send({mes:"Please give a valid Publisher ID"})
         }
-    }
+        let author=await authorModel.findById(set.author)
+        if(!author){
+            return res.send({mes:"author id is not valid"})
+        }
+        if(!set.publisher){return res.send({data:"Give the if for this publisher"})}
+        const publisher=await publisherModel.findById(set.publisher)
+        if(!publisher){
+            return res.send({
+            data:"Give the valid ID for publisher"
+        })}
+    const Btotal=await bookModel.create(set)
     res.send({data:Btotal})
 }
 // The authorId is present in the request body. If absent send an error message that this detail is required

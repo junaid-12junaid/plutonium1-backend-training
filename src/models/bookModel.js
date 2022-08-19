@@ -4,13 +4,16 @@ const bookModel=new mongoose.Schema({
     name:String,
 	author:{
         type:ObjectId,
-        ref:'author'
+        ref:'author',
+        required:true
+
     },
 	price:Number,
 	ratings:Number,
 	publisher:{
         type:ObjectId,
-        ref:'publisher'
+        ref:'publisher',
+        required:true
     }
 
 })
