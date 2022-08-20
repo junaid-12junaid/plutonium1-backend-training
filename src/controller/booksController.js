@@ -17,20 +17,21 @@ const createPublisher=async function(req,res){
 }
 
 const createBooks=async function(req,res){
-    let set=req.body
-    if(!set.author){
-        return res.send({State:false, mes:"please give the Id for Author"})
-        }
-        let author=await authorModel.findById(set.author)
-        if(!author){
-            return res.send({mes:"author id is not valid"})
-        }
-        if(!set.publisher){return res.send({data:"Give the if for this publisher"})}
-        const publisher=await publisherModel.findById(set.publisher)
-        if(!publisher){
-            return res.send({
-            data:"Give the valid ID for publisher"
-        })}
+    const set=req.body
+    // if(!set.author){
+    //     return res.send({data:"The author Id is required"})
+    // }
+    // const author=await authorModel.findById(set.author)
+    // if(!author){
+    //     return res.send({data:"The author id is in valid"})
+    // }
+    // if(!set.publisher){
+    //     return res.send({data:"the publisher Id is required"})
+    // }
+    // const publisher=await publisherModel.findById(set.publisher)
+    // if(!publisher){
+    //     return res.send({data:"Give the valid ID for the publisher"})
+    // }
     const Btotal=await bookModel.create(set)
     res.send({data:Btotal})
 }
@@ -43,7 +44,49 @@ const alldetails=async function(req,res){
     const details=await bookModel.find().populate(['author' ,'publisher'])  //.populate('author').populate('publisher')
     res.send({data:details})
 }
+
+
+// a) Add a new boolean attribute in the book schema called isHardCover with a default false value. For the books published by 'Penguin' and 'HarperCollins', update this key to true.
+const updateHardCover=async function(req,res){
+    
+
+    const books=await bookModel.find().populate(['author','publisher'])
+
+    const bookOfpublisher=books.filter(x=>(x.publisher.name=="Penguin")||(x.publisher.name=="HarperCollins"))
+
+    const booksname=bookOfpublisher.map(x=>(x.name))
+    let arr1=[]
+    for(i=0;i<booksname.length;i++){
+        let ele=booksname[i]
+        let updatedata=await bookModel.findOneAndUpdate({name:ele},{$set:{isHardCover:true}},{new:true})
+        arr1.push(updatedata)
+    }
+    res.send({data:arr1})
+}
+
+// b) For the books written by authors having a rating greater than 3.5, update the books price by 10 (For eg if old price for such a book is 50, new will be 60) 
+const updatePrice=async function(req,res){
+    const alldata=await bookModel.find().populate(['author','publisher'])
+
+    const filterdata=alldata.filter(x=>(x.author.rating>=3.5))
+
+    const mop=filterdata.map(x=>(x.name))
+    let arr1=[]
+
+    for(i=0;i<mop.length;i++){
+        let rate=mop[i]
+        const updatePrice1=await bookModel.findOneAndUpdate({name:rate},{$inc:{price:+10}},{new:true})
+        arr1.push(updatePrice1)
+    }
+    res.send({data:arr1})
+
+}
+
+
+
 module.exports.createAuthor=createAuthor
 module.exports.createPublisher=createPublisher
 module.exports.createBooks=createBooks
 module.exports.alldetails=alldetails
+module.exports.updateHardCover=updateHardCover
+module.exports.updatePrice=updatePrice

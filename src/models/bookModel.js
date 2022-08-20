@@ -14,7 +14,8 @@ const bookModel=new mongoose.Schema({
         type:ObjectId,
         ref:'publisher',
         required:true
-    }
+    },
+    isHardCover:Boolean
 
 })
 
