@@ -11,4 +11,5 @@ router.post("/createBooks",totaldata.createBooks)
 router.get('/alldetails',totaldata.alldetails)
 router.put('/Books',totaldata.updateHardCover)
 router.put('/Books1',totaldata.updatePrice)
+router.put('/bookrating',totaldata.bookrating)
 module.exports = router;

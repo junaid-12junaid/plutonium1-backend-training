@@ -83,6 +83,21 @@ const updatePrice=async function(req,res){
 }
 
 
+//if author age is >=50,update the book rating to 10
+
+const bookrating=async function(req,res){
+    const books=await bookModel.find().populate('author')
+    const bookfilter=books.filter(x=>(x.author.age>=50))
+    const bookname=bookfilter.map(x=>x.name)
+    let arr1=[]
+    for (i=0;i<bookname.length;i++){
+        let bookupdate=await bookModel.findOneAndUpdate({name:bookname[i]},{$set:{ratings:10}},{new:true})
+        arr1.push(bookupdate)
+    }
+    // const er=await arr1.find().populate('author')
+    res.send({data:arr1})
+}
+
 
 module.exports.createAuthor=createAuthor
 module.exports.createPublisher=createPublisher
@@ -90,3 +105,4 @@ module.exports.createBooks=createBooks
 module.exports.alldetails=alldetails
 module.exports.updateHardCover=updateHardCover
 module.exports.updatePrice=updatePrice
+module.exports.bookrating=bookrating
