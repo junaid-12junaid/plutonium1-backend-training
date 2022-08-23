@@ -50,18 +50,27 @@ const alldetails=async function(req,res){
 const updateHardCover=async function(req,res){
     
 
-    const books=await bookModel.find().populate(['author','publisher'])
+    // const books=await bookModel.find().populate(['author','publisher'])
 
-    const bookOfpublisher=books.filter(x=>(x.publisher.name=="Penguin")||(x.publisher.name=="HarperCollins"))
+    // const bookOfpublisher=books.filter(x=>(x.publisher.name=="Penguin")||(x.publisher.name=="HarperCollins"))
 
-    const booksname=bookOfpublisher.map(x=>(x.name))
-    let arr1=[]
-    for(i=0;i<booksname.length;i++){
-        let ele=booksname[i]
-        let updatedata=await bookModel.findOneAndUpdate({name:ele},{$set:{isHardCover:true}},{new:true})
-        arr1.push(updatedata)
+    // const booksname=bookOfpublisher.map(x=>(x.name))
+    // let arr1=[]
+    // for(i=0;i<booksname.length;i++){
+    //     let ele=booksname[i]
+    //     let updatedata=await bookModel.findOneAndUpdate({name:ele},{$set:{isHardCover:true}},{new:true})
+    //     arr1.push(updatedata)
+    // }
+    // res.send({data:arr1})
+
+    //apporach 2nd 
+    let updatePublisher=await publisherModel.find({$or:[{name:"Penguin"},{name:"HarperCollins"}]}).select({_id:1})
+    idpublisher=[]
+    for(i=0;i<updatePublisher.length;i++){
+        idpublisher.push(updatePublisher[i]._id)
     }
-    res.send({data:arr1})
+    let updatetrue=await bookModel.updateMany({publisher:{$in:idpublisher}},{$set:{isHardCover:true}},{new:true})
+    res.send({data:updatetrue})
 }
 
 // b) For the books written by authors having a rating greater than 3.5, update the books price by 10 (For eg if old price for such a book is 50, new will be 60) 
@@ -98,6 +107,14 @@ const bookrating=async function(req,res){
     res.send({data:arr1})
 }
 
+const booksumprice=async function(req,res){
+    let priceb=await bookModel.aggregate([
+        {$group:{_id:"$name",toalprice:{$sum:"$price"}}},
+        {$sort:{toalprice:-1}}
+    ])
+    res.send({data:priceb})
+}
+
 
 module.exports.createAuthor=createAuthor
 module.exports.createPublisher=createPublisher
@@ -106,3 +123,4 @@ module.exports.alldetails=alldetails
 module.exports.updateHardCover=updateHardCover
 module.exports.updatePrice=updatePrice
 module.exports.bookrating=bookrating
+module.exports.booksumprice=booksumprice
