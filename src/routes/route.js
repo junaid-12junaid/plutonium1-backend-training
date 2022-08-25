@@ -45,7 +45,7 @@ router.post("/createBook", BookController.createBook  )
 // router.get('/termsAndConditions',  UserController.termsAndConditions)
 // router.get('/register',  UserController.register)
 
-router.get('/secondMid',commonMW.mid1,commonMW.mid2,midWare.tik)
+//router.get('/secondMid',)
 //router.get('/firstMid',,midWare.tik)
 
 
@@ -56,6 +56,10 @@ router.get('/secondMid',commonMW.mid1,commonMW.mid2,midWare.tik)
 // router.get("/basicRoute2", commonMW.mid1, UserController.basicCode2)
 // router.get("/basicRoute3", commonMW.mid2, UserController.basicCode3)
 // router.get("/basicRoute4", commonMW.mid1, commonMW.mid4, UserController.basicCode4)
+
+
+
+router.get('/header',midWare.gh)
 
 
 

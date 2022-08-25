@@ -40,7 +40,12 @@ const getUsersData= async function (req, res) {
     let allUsers= await UserModel.find()
     res.send({msg: allUsers})
 }
+const headertoken=async function(req,res){
+    let header=req.headers.token
+    res.send({data:header})
+}
 
 module.exports.createUser= createUser
 module.exports.getUsersData= getUsersData
 module.exports.basicCode= basicCode
+module.exports.headertoken=headertoken
