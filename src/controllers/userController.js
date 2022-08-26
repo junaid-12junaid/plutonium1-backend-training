@@ -34,8 +34,9 @@ const loginUser = async function (req, res) {
   let token = jwt.sign(
     {
       userId: user._id.toString(),
-      batch: "thorium",
+      batch: "plutonium",
       organisation: "FunctionUp",
+      dateAt:"18-07-2022"
     },
     "functionup-plutonium-very-very-secret-key"
   );
@@ -79,6 +80,13 @@ const updateUser = async function (req, res) {
   // Check if the token is present
   // Check if the token present is a valid token
   // Return a different error message in both these cases
+    let token=req.headers['x-Auth-token']
+    if(!token) token=req.headers['x-auth-token']
+
+    if(!token) return res.send("the token is required")
+
+    let token1=jwt.verify(token,"functionup-plutonium-very-very-secret-key")
+    if(!token1) return res.send({data:"the token is invalid"})
 
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
@@ -89,10 +97,13 @@ const updateUser = async function (req, res) {
 
   let userData = req.body;
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
-  res.send({ status: updatedUser, data: updatedUser });
+  res.send({ status: updatedUser});
 };
+
+
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+
