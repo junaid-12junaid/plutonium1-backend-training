@@ -33,16 +33,8 @@ const login=async function(req,res){
 
 
 const userF=async function(req,res){
-    let token=req.headers['x-auth-token']
-    let token1=jwt.verify(token,'hi-buddy-whatsapp-bro')
-if(!token1){
-    return res.send({alert:"the token is invalid"})
-}
+
 let userId=req.params.userId
-//Authorization
-    let userlogedIn=token1.UserID
-    if(userId!=userlogedIn)
-    return res.send("you can't fetch the details of other user")
     let userf=await userModel.findById(userId)
     if(!userf){
         return res.send({alert:"no such user exists"})
@@ -52,15 +44,7 @@ res.send({data:userf})
 
 
 const userUp=async function(req,res){
-    let token=req.headers['x-auth-token']
-
     let userId=req.params.userId
-    let verifyUser=jwt.verify(token,"hi-buddy-whatsapp-bro")
-    let verifyI=verifyUser.UserID
-    if(!verifyUser)
-    return res.send({data:"the token is not valid"})
-    if(userId!=verifyI)
-    return res.send({data:"you can't update other user details"})
     let userR=await userModel.findById(userId).select({_id:1})
     if(!userR){
         return res.send({alert:"the user does't exists"})
@@ -74,10 +58,6 @@ const userUp=async function(req,res){
 
 const userD=async function(req,res){
     let userId=req.params.userId
-    let token=req.headers['x-auth-token']
-    let verify=jwt.verify(token,'hi-buddy-whatsapp-bro')
-    if(userId!=verify.UserID)
-    return res.send({data:"You can't delete the datails of other user"})
     if(!userId){
         return res.send({data:"the user does't exists"})
     }
