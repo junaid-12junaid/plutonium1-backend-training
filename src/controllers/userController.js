@@ -1,5 +1,6 @@
 const userModel=require('../models/userModel')
 const jwt=require('jsonwebtoken')
+const axios=require('axios')
 
 const userC=async function(req,res){
     try{
@@ -15,7 +16,7 @@ const userC=async function(req,res){
     catch(err){
         console.log("this is the error:" ,err.message)
         res.status(500).send({data:err.message})
-    }
+    }8
 }
 
 
@@ -103,8 +104,20 @@ const userD=async function(req,res){
 
 }
 
+
+const getstates=async function(req,res){
+    let operation={
+        method:'get',
+        url:'https://cdndemo-api.co-vin.in/api/v2/admin/location/states'
+    }
+    let result=await axios(operation)
+    console.log(result.data)
+    res.send(result.data)
+}
+
 module.exports.userC=userC
 module.exports.login=login
 module.exports.userF=userF
 module.exports.userUp=userUp
 module.exports.userD=userD
+module.exports.getstates=getstates

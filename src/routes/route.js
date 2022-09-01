@@ -17,4 +17,6 @@ router.get('/users/:userId',mid.mid1,userController.userF)
 router.put('/users/:userId',mid.mid1,userController.userUp)
 
 router.delete('/users/:userId',mid.mid1,userController.userD)
+
+router.get('/getStates',userController.getstates)
 module.exports = router;
